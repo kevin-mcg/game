@@ -14,25 +14,28 @@ class Game
     rand(1..6)
   end
 
-  def play
+  def play(round = 1)
     puts "Let's play #{@title}\n\n"
     puts "Before playing:"
     puts @players
     puts ""
+    
+    1.upto(round) do |r| 
+      puts "Round: #{r}"
+      @players.each do |p|
+        number_rolled = roll_die
+        puts "The number rolled is: #{number_rolled}"
 
-    @players.each do |p|
-      number_rolled = roll_die
-      puts "The number rolled is: #{number_rolled}"
-
-      case number_rolled
-      when 1..2
-        p.drain
-        puts "#{p.name} got drained 😩"
-      when 3..4
-        puts "#{p.name} got skipped"
-      else
-        p.boost
-        puts "#{p.name} got boosted 😁"
+        case number_rolled
+        when 1..2
+          p.drain
+          puts "#{p.name} got drained 😩"
+        when 3..4
+          puts "#{p.name} got skipped"
+        else
+          p.boost
+          puts "#{p.name} got boosted 😁"
+        end
       end
     end
 
