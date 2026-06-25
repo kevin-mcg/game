@@ -32,6 +32,7 @@ class Game
       @players.each do |p|
         number_rolled = roll_die
         treasure_found = TreasureTrove.random_treasure
+        p.found_treasure(treasure_found.name, treasure_found.points)
         puts "The number rolled is: #{number_rolled}"
 
         case number_rolled
