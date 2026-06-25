@@ -20,10 +20,10 @@ class Game
     puts "Let's play #{@title}\n\n"
     puts "The treasures to be found are:\n"
     TreasureTrove::TREASURES.each do |t|
-      puts t.name + t.points
+      puts "A #{t.name} is worth #{t.points} points"
     end
 
-    puts "Before playing:"
+    puts "\nBefore playing:"
     puts @players
     puts ""
     
@@ -31,17 +31,21 @@ class Game
       puts "Round: #{r}"
       @players.each do |p|
         number_rolled = roll_die
+        treasure_found = TreasureTrove.random_treasure
         puts "The number rolled is: #{number_rolled}"
 
         case number_rolled
         when 1..2
           p.drain
           puts "#{p.name} got drained 😩"
+          puts "#{p.name} found a #{treasure_found.name} worth #{treasure_found.points} points"
         when 3..4
           puts "#{p.name} got skipped"
+          puts "#{p.name} found a #{treasure_found.name} worth #{treasure_found.points} points"
         else
           p.boost
           puts "#{p.name} got boosted 😁"
+          puts "#{p.name} found a #{treasure_found.name} worth #{treasure_found.points} points"
         end
       end
     end
