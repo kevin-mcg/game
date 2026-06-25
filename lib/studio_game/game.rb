@@ -16,9 +16,35 @@ class Game
     rand(1..6)
   end
 
+  def print_stats
+    puts "\n#{@title} Game Stats:"
+    puts "-" * 30
+
+    puts sorted_players
+
+    @players.each do |player|
+      puts "\n#{player.name}'s treasure point totals:"
+      player.found_treasures.each do |name, points|
+        puts "#{name}: #{points}"
+      end
+      puts "total: #{player.points}"
+    end
+
+    puts "\nHigh Scores:"
+    sorted_players.each do |player|
+      name = player.name.ljust(20, ".")
+      points = player.score.round.to_s.rjust(5)
+      puts "#{name}#{points}"
+    end
+  end
+
+  def sorted_players
+    @players.sort_by {|p| p.score}.reverse
+  end
+
   def play(round = 1)
     puts "Let's play #{@title}\n\n"
-    puts "The treasures to be found are:\n"
+    puts "\nThe treasures to be found are:\n"
     TreasureTrove::TREASURES.each do |t|
       puts "A #{t.name} is worth #{t.points} points"
     end
