@@ -1,5 +1,5 @@
 class Player
-  attr_reader :health
+  attr_reader :health, :found_treasures
   attr_accessor :name
 
   def initialize(name, health = 100)
@@ -21,15 +21,19 @@ class Player
   end
 
   def score
-    @score = @health + @name.length
+    @health + points
   end
 
   def to_s
-    "I'm #{@name} with a health of #{@health} and a score of #{score}: #{@found_treasures}"
+    "I'm #{@name} with health = #{@health}, points = #{points}, and score #{score}"
   end
 
   def found_treasure(name, points)
     @found_treasures[name] += points
+  end
+
+  def points
+    @found_treasures.values.sum
   end
 end
 
