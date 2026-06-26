@@ -1,6 +1,10 @@
+require_relative 'playable'
+
 class Player
-  attr_reader :health, :found_treasures
-  attr_accessor :name
+  attr_reader :found_treasures
+  attr_accessor :name, :health
+
+  include Playable
 
   def initialize(name, health = 100)
     @name = name.capitalize
@@ -10,14 +14,6 @@ class Player
 
   def name=(new_name)
     @name = new_name.capitalize
-  end
-
-  def boost
-    @health += 15
-  end
-
-  def drain
-    @health -= 10
   end
 
   def score
