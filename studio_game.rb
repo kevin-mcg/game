@@ -1,5 +1,7 @@
 require_relative "lib/studio_game/game"
 require_relative "lib/studio_game/player"
+require_relative "lib/studio_game/clumsy_player"
+require_relative "lib/studio_game/berserk_player"
 
 # player_1 = Player.new("finn", 60)
 # player_2 = Player.new("lucy", 90)
@@ -11,6 +13,14 @@ game = Game.new("Winner Takes All")
 # game.add_player(player_2)
 # game.add_player(player_3)
 # game.add_player(player_4)
+
+# game.load_players
+
+klutz = ClumsyPlayer.new("klutz", 105, 45)
+game.add_player(klutz)
+
+berserker = BerserkPlayer.new("berserker", 50)
+game.add_player(berserker)
 
 players_file = File.join(__dir__, "players.csv")
 game.load_players(ARGV.shift || players_file)
