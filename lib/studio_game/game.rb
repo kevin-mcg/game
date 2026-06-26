@@ -32,14 +32,36 @@ class Game
 
     puts "\nHigh Scores:"
     sorted_players.each do |player|
-      name = player.name.ljust(20, ".")
-      points = player.score.round.to_s.rjust(5)
-      puts "#{name}#{points}"
+      high_score_entry(player)
     end
   end
 
   def sorted_players
     @players.sort_by {|p| p.score}.reverse
+  end
+
+  def load_players(from_file)
+    File.readlines(from_file, chomp: true).each do |line|
+      puts line
+      name, health = line.split(",")
+      player = Player.new(name, health.to_i)
+      add_player(player)
+    end
+  end
+
+  def save_high_scores(filename = "high_scores.txt")
+    File.open(filename, "w") do |file|
+      sorted_players.each do |sp|
+        # file.puts "#{sp.name},#{sp.score}"
+        file.puts high_score_entry(sp)
+      end
+    end
+  end
+
+  def high_score_entry(player)
+    name = player.name.ljust(20, ".")
+    score = player.score.round.to_s.rjust(5)
+    "#{name}#{score}"
   end
 
   def play(round = 1)
