@@ -24,6 +24,11 @@ class Player
     @health + points
   end
 
+  def self.from_csv(line_of_csv)
+    name, health = line_of_csv.split(",")
+    Player.new(name, health.to_i)
+  end
+
   def to_s
     "I'm #{@name} with health = #{@health}, points = #{points}, and score #{score}"
   end
