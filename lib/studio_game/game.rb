@@ -45,6 +45,9 @@ class Game
       player = Player.from_csv(line)
       add_player(player)
     end
+  rescue Errno::ENOENT
+    puts "Whoops, #{from_file} not found!"
+    exit 1
   end
 
   def save_high_scores(filename = "high_scores.txt")

@@ -26,7 +26,10 @@ class Player
 
   def self.from_csv(line_of_csv)
     name, health = line_of_csv.split(",")
-    Player.new(name, health.to_i)
+    Player.new(name, Integer(health))
+  rescue ArgumentError => e
+    puts e.message
+    Player.new(name)
   end
 
   def to_s
