@@ -1,7 +1,10 @@
 require_relative "treasure_trove"
+require_relative "auditable"
 
 class Game
   attr_reader :title, :players
+
+  include Auditable
 
   def initialize(title)
     @title = title
@@ -13,7 +16,10 @@ class Game
   end
 
   def roll_die
-    rand(1..6)
+    rn = rand(1..6)
+    # rn = [1, 1, 2, 5, 6, 6].sample
+    audit(rn)
+    rn
   end
 
   def print_stats
@@ -82,7 +88,6 @@ class Game
         number_rolled = roll_die
         treasure_found = TreasureTrove.random_treasure
         p.found_treasure(treasure_found.name, treasure_found.points)
-        puts "The number rolled is: #{number_rolled}"
 
         case number_rolled
         when 1..2
