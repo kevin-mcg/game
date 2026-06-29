@@ -8,7 +8,7 @@ require_relative "lib/studio_game/berserk_player"
 # player_3 = Player.new("jase")
 # player_4 = Player.new("alex", 125)
 
-game = Game.new("Winner Takes All")
+game = StudioGame::Game.new("Winner Takes All")
 # game.add_player(player_1)
 # game.add_player(player_2)
 # game.add_player(player_3)
@@ -16,10 +16,10 @@ game = Game.new("Winner Takes All")
 
 # game.load_players
 
-klutz = ClumsyPlayer.new("klutz", 105, 45)
+klutz = StudioGame::ClumsyPlayer.new("klutz", 105, 45)
 game.add_player(klutz)
 
-berserker = BerserkPlayer.new("berserker", 50)
+berserker = StudioGame::BerserkPlayer.new("berserker", 50)
 game.add_player(berserker)
 
 players_file = File.join(__dir__, "players.csv")
